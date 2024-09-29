@@ -1,60 +1,66 @@
 console.log("Hello World")
 
 let computer = "none"
-let number = 1
-let player = "none"
+let human = "none"
+result = 0
+results = "none"
+let humanScore = 0
+let computerScore = 0
+let round = "none"
 
 
 function getComputerChoice(number) {
-    return Math.floor(Math.random() * number) 
-}
-
-let result = getComputerChoice(3);
-
-if (result === 2) {
-    computer = "rock"
-}else if(result === 1) {
-    computer = "scissors"
-}else {
-    computer = "paper"
-}
-
-player = prompt("Rock, Paper or Scissors?", '');
-
-alert("Computer picked " + computer)
-
-if (player === "scissors" || player === "S" || player === "s" || player === "Scissors") {
-    player = "scissors"
-    alert("You picked " + player)
-    if (computer === "rock") {
-        alert("You lose...")
-    }else if (computer === "scissors") {
-        alert("Draw!!")
+    result = Math.floor(Math.random() * number) 
+    if (result === 2) {
+        computer = "rock"
+    }else if(result === 1) {
+        computer = "scissors"
     }else {
-        alert("You win!!!")
+        computer = "paper"
     }
-} else if (player === "rock" || player === "r" || player === "R" || player === "Rock") {
-    player = "rock"
-    alert("You picked " + player)
-    if (computer === "paper") {
-        alert("You lose...")
-    }else if (computer === "rock") {
-        alert("Draw!!")
-    }else {
-        alert("You win!!!")
-    } 
-} else if (player === "paper" || player === "p" || player === "P" || player === "Paper") {
-    player = "paper"
-    alert("You picked " + player)
-    if (computer === "scissors") {
-        alert("You lose...")
-    }else if (computer === "paper") {
-        alert("Draw!!")
-    }else {
-        alert("You win!!!")
-    }
-} else {
-    alert("Did you pick gun or something? Try again.")
+    return 
 }
 
+function getHumanChoice(human) {
+        return human.substring(0).toLowerCase();
+    }    
 
+
+function playRound(human, computer) {
+    if (human === computer) {
+            round = "tie"
+            humanScore += 1
+    }else if (human === "rock") {
+        if (computer === "paper") {
+            computerScore += 1
+        }else if (computer === "scissors") {
+            humanScore += 1
+        }
+    }else if (human === "paper") {
+        if (computer === "scissors") {
+            computerScore += 1
+        }else if (computer === "rock") {
+            humanScore += 1
+        }
+    }else if (human === "scissors") {
+        if (computer === "rock") {
+            computerScore += 1
+        }else if (computer === "paper") {
+            humanScore += 1
+        }
+    }else {
+        alert("You mispelled ya goof!")
+    }
+}
+while (humanScore < 5 && computerScore < 5) {
+    result = getComputerChoice(3);
+    human = prompt("Rock, Paper or Scissors?", '');
+    human = getHumanChoice(human);
+    
+    playRound(human, computer);
+    
+    alert(human + " " + computer + " " + humanScore + " " + computerScore);
+    
+}
+
+alert("program stop");
