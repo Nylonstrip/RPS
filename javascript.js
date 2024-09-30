@@ -7,6 +7,8 @@ results = "none"
 let humanScore = 0
 let computerScore = 0
 let round = "none"
+let hScore = 0
+let cScore = 0
 
 
 function getComputerChoice(number) {
@@ -29,7 +31,6 @@ function getHumanChoice(human) {
 function playRound(human, computer) {
     if (human === computer) {
             round = "tie"
-            humanScore += 1
     }else if (human === "rock") {
         if (computer === "paper") {
             computerScore += 1
@@ -52,14 +53,31 @@ function playRound(human, computer) {
         alert("You mispelled ya goof!")
     }
 }
+function roundResults() {
+    alert("You picked " + human)
+    alert("Computer picked " + computer)
+    if (hScore != humanScore) {
+        hScore = humanScore
+        alert("You win!!")
+    }
+    else if (cScore != computerScore) {
+        cScore = computerScore
+        alert("You lose...")
+    }
+    else {
+        alert("Tie!")
+    }
+}
 while (humanScore < 5 && computerScore < 5) {
     result = getComputerChoice(3);
     human = prompt("Rock, Paper or Scissors?", '');
     human = getHumanChoice(human);
     
     playRound(human, computer);
+    roundResults();
     
-    alert(human + " " + computer + " " + humanScore + " " + computerScore);
+    alert("Player: " + humanScore);
+    alert("Computer: " + computerScore);
     
 }
 
