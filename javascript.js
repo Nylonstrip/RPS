@@ -50,6 +50,7 @@ function playRound(human, computer) {
             humanScore += 1
         }
     }else {
+        human = "none"
         alert("You mispelled ya goof!")
     }
 }
@@ -63,16 +64,17 @@ function roundResults() {
     else if (cScore != computerScore) {
         cScore = computerScore
         alert("You lose...")
+    }else if (human === computer) {
+        alert("Tie!")
     }
     else {
-        alert("Tie!")
+        alert("Try again")
     }
 }
 while (humanScore < 5 && computerScore < 5) {
     result = getComputerChoice(3);
     human = prompt("Rock, Paper or Scissors?", '');
-    human = getHumanChoice(human);
-    
+    getHumanChoice(human);
     playRound(human, computer);
     roundResults();
     
